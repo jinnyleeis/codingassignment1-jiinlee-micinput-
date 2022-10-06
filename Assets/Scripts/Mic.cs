@@ -11,13 +11,13 @@ public class Mic : MonoBehaviour
         audiosource = this.gameObject.GetComponent<AudioSource>();
     }
 
-    public void StartRecording()//녹음을 위한
+    public void StartPlaying()//재생을 위한
     {
         audiosource.Play();//오디오 소스 클래스의 멤버 메소드인 Play()함수를 통해,
                            //재생한다. 
     }
 
-    public void StartPlaying()//재생을 위한 
+    public void StartRecording()//녹음을 위한 
     {
         audiosource.clip = Microphone.Start(Microphone.devices[0].ToString(),false,3,44100);
         //devices: 현재 장치에 연결된 마이크들의 이름이 있는 리스트이다. 
