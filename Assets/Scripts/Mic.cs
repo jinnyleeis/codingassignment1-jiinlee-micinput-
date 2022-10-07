@@ -17,7 +17,8 @@ public class Mic : MonoBehaviour
     public bool isloop;
     private int samplerate = 4410;//frequency 
     private int lastSamplePos = 0;
-    bool isrecoreded=false;
+    bool isrecoreded=true;
+    private int channels = 0;
     
 
     // Start is called before the first frame update
@@ -25,13 +26,13 @@ public class Mic : MonoBehaviour
     void Start()
     {
         audiosource = this.gameObject.GetComponent<AudioSource>();
-        
+
         
     }
 
     public void StartPlaying()//재생을 위한
     {
-        audiosource.clip = AudioClip.Create("Real_time", readSamples.Count, 0, 44100, false);
+        audiosource.clip = AudioClip.Create("Real_time", readSamples.Count, channels, 44100, false);
         audiosource.clip.SetData(readSamples.ToArray(), 0);
         if (!audiosource.isPlaying){
             audiosource.Play();
@@ -60,6 +61,8 @@ public class Mic : MonoBehaviour
         //Use this class to record to an AudioClip using a connected microphone.
         //Start함수는 파라미터로, 디바이스명(string),계속해서 녹음할것인지 여부(bool), 늑음할 클립의 길이(int),
         //녹음할 클립의 샘플 rate
+        channels = mic.channels;
+        
     }
 
     public void SavetoAudioClipsStorage()
