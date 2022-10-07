@@ -1,25 +1,54 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Profiling.LowLevel.Unsafe;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Mic : MonoBehaviour
 {
+    static private int num=0;
     private AudioSource audiosource;
+    private AudioClip mic;
+    AudioClip[] audioclips = new AudioClip[num];
+    private float[] samples = null;
+    private List<float> readSamples = null;
+    public int lengthsec;
+    public bool isloop;
+    private int samplerate = 4410;//frequency 
+    private int lastSamplePos = 0;
+    bool isrecoreded=false;
+    
+
     // Start is called before the first frame update
+    //private out;
     void Start()
     {
         audiosource = this.gameObject.GetComponent<AudioSource>();
+        
+        
     }
 
     public void StartPlaying()//재생을 위한
     {
-        audiosource.Play();//오디오 소스 클래스의 멤버 메소드인 Play()함수를 통해,
-                           //재생한다. 
+        audiosource.clip = AudioClip.Create("Real_time", readSamples.Count, 0, 44100, false);
+        audiosource.clip.SetData(readSamples.ToArray(), 0);
+        if (!audiosource.isPlaying){
+            audiosource.Play();
+        }
+
+        SavetoAudioClipsStorage();
+
+        readSamples.Clear();
+        
     }
 
     public void StartRecording()//녹음을 위한 
     {
-        audiosource.clip = Microphone.Start(Microphone.devices[0].ToString(),false,3,44100);
+        isrecoreded = true;
+        samples = new float[samplerate];
+        readSamples = new List<float>();
+        mic = Microphone.Start(Microphone.devices[0].ToString(),isloop,lengthsec,samplerate);
         //devices: 현재 장치에 연결된 마이크들의 이름이 있는 리스트이다. 
         //false를 통해, 연속 녹음이 아닌, 한번, 레코드 버튼 눌렀을 시, 한번 녹음.
         //clip은 default 재생되는 오디오 클립입니다.
@@ -33,9 +62,63 @@ public class Mic : MonoBehaviour
         //녹음할 클립의 샘플 rate
     }
 
+    public void SavetoAudioClipsStorage()
+    {
+        num += 1;
+        audioclips[num - 1] = audiosource.clip;
+        print(audioclips[num - 1]+"saved");
+    }
+
     // Update is called once per frame
     void Update()
     {
-        
+        if (isrecoreded == true) ;
+        {
+            ReadMic();
+            isrecoreded =false;
+        }
+
+
     }
+
+    private void ReadMic()
+    {
+        int currentPos = Microphone.GetPosition(Microphone.devices[0].ToString());
+        //가장 최근에 기록한 오디오 샘플의 위치를 저장하는 변수이다.
+        if (currentPos - lastSamplePos > 0)
+        {
+            samples = new float[currentPos - lastSamplePos];
+            
+            mic.GetData(samples, lastSamplePos);
+            
+            readSamples.AddRange(samples);
+        }
+
+        lastSamplePos = currentPos;
+
+
+    }
+
+    public void PlayBackStorage()
+    {
+        int playnum = num - 1;
+        if (playnum > num - 1)
+        {
+            audiosource.clip = audioclips[playnum];
+            audiosource.Play();
+        }
+
+}
+    public void PlayFrontStorage()
+    {
+        int playnum = num + 1;
+        if (playnum < num - 1)
+        {
+            audiosource.clip = audioclips[playnum];
+            audiosource.Play();
+        }
+
+    }
+
+
 }
