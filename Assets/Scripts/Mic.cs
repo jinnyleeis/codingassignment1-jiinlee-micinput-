@@ -7,7 +7,7 @@ using UnityEngine.UI;
 
 public class Mic : MonoBehaviour
 {
-    static private int num=0;
+    static private int num=1;
     private AudioSource audiosource;
     private AudioClip mic;
     AudioClip[] audioclips = new AudioClip[num];
@@ -17,14 +17,18 @@ public class Mic : MonoBehaviour
     public bool isloop;
     private int samplerate = 4410;//frequency 
     private int lastSamplePos = 0;
-    bool isrecoreded=true;
+    public bool isrecoreded=false;
     private int channels = 0;
     
+    public float READ_FLUSH_TIME = 0.5f;
+    private float writeFlushTimer = 0.0f;
+    private float readFlushTimer = 0.0f;
 
     // Start is called before the first frame update
     //private out;
     void Start()
     {
+        readSamples = new List<float>();
         audiosource = this.gameObject.GetComponent<AudioSource>();
 
         
@@ -32,23 +36,40 @@ public class Mic : MonoBehaviour
 
     public void StartPlaying()//재생을 위한
     {
-        audiosource.clip = AudioClip.Create("Real_time", readSamples.Count, channels, 44100, false);
-        audiosource.clip.SetData(readSamples.ToArray(), 0);
-        if (!audiosource.isPlaying){
-            audiosource.Play();
+        readFlushTimer += Time.deltaTime;
+        if (readFlushTimer > READ_FLUSH_TIME && readSamples.Count > 0)
+        {
+            //if (readUpdateId != previousReadUpdateId && readSamples != null && readSamples.Count > 0)
+          //  {
+
+              //  previousReadUpdateId = readUpdateId;
+
+                audiosource.clip = AudioClip.Create("Real_time", readSamples.Count, channels, 44100, false);
+                audiosource.clip.SetData(readSamples.ToArray(), 0);
+                if (!audiosource.isPlaying)
+                {
+                    audiosource.Play();
+                }
+
+                SavetoAudioClipsStorage();
+                readSamples.Clear();
+                //readUpdateId++;
+           // }
+
+            readFlushTimer = 0.0f;
         }
 
-        SavetoAudioClipsStorage();
+        isrecoreded = false;
 
-        readSamples.Clear();
-        
+        //
+
     }
 
     public void StartRecording()//녹음을 위한 
     {
-        isrecoreded = true;
-        samples = new float[samplerate];
-        readSamples = new List<float>();
+       
+        
+        
         mic = Microphone.Start(Microphone.devices[0].ToString(),isloop,lengthsec,samplerate);
         //devices: 현재 장치에 연결된 마이크들의 이름이 있는 리스트이다. 
         //false를 통해, 연속 녹음이 아닌, 한번, 레코드 버튼 눌렀을 시, 한번 녹음.
@@ -67,25 +88,30 @@ public class Mic : MonoBehaviour
 
     public void SavetoAudioClipsStorage()
     {
-        num += 1;
+        
         audioclips[num - 1] = audiosource.clip;
         print(audioclips[num - 1]+"saved");
+        num += 1;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (isrecoreded == true) ;
+        if (isrecoreded == true)
         {
             ReadMic();
-            isrecoreded =false;
+
+            StartPlaying();
         }
+
+
 
 
     }
 
     private void ReadMic()
     {
+        writeFlushTimer += Time.deltaTime;
         int currentPos = Microphone.GetPosition(Microphone.devices[0].ToString());
         //가장 최근에 기록한 오디오 샘플의 위치를 저장하는 변수이다.
         if (currentPos - lastSamplePos > 0)

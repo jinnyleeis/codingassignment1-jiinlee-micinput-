@@ -27,6 +27,7 @@ public class PlayButton : MonoBehaviour
 
     private void Clicked0() {
         //여기서 재생시키자. 
+        mic.isrecoreded = true;
         mic.StartPlaying();
     }
     private void Clicked1() {
