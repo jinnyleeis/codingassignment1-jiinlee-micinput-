@@ -2,8 +2,9 @@
 
 isloop==true 
 -> circular buffer
-![ISLOOP![ISLOOP_TRUE2_AdobeExpress-3](https://user-images.githubusercontent.com/101055312/194542130-d235a178-dc52-43d9-84d3-5de98f296651.gif)
-_TRUE2_AdobeExpress](https://user-images.githubusercontent.com/101055312/194541933-e2fd0404-0f82-4b60-aba6-274e1805a674.gif)
+
+![ISLOOP_TRUE2_AdobeExpress-3](https://user-images.githubusercontent.com/101055312/194542699-5b510f42-7790-4f91-906f-32c6bc14df6e.gif)
+
 
 
 
