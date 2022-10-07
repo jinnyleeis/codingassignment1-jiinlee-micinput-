@@ -18,8 +18,9 @@ public class RecordButton : MonoBehaviour
         
     }
 
-    private void Clicked() {
+    private void Clicked() {//레코딩 시작 버튼
         //여기서 재생시키자. 
         mic.StartRecording();
+        
     }
 }
