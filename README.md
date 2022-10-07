@@ -2,11 +2,12 @@
 
 isloop==true 
 -> circular buffer
+![ISLOOP_TRUE2_AdobeExpress](https://user-images.githubusercontent.com/101055312/194541933-e2fd0404-0f82-4b60-aba6-274e1805a674.gif)
 
-![ISLOOP_TRUE2_AdobeExpress](https://user-images.githubusercontent.com/101055312/194541080-3312f9f7-aa58-48eb-a228-2bb527658da0.gif)
+
 
 
 isloop==false ->
 circular buffer X
 
-![ISLOOP_FALSE2_AdobeExpress](https://user-images.githubusercontent.com/101055312/194541125-9a0783b4-c23d-45ac-8beb-becdb9d9874a.gif)
+![ISLOOP_FALSE2_AdobeExpress](https://user-images.githubusercontent.com/101055312/194541728-616e11d2-905e-4598-8ba0-aabd198f22b8.gif)
