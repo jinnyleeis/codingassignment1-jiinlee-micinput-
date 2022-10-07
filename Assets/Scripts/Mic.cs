@@ -98,9 +98,9 @@ public class Mic : MonoBehaviour
             ReadMic();
            
         }
-        text1.text = "lengthSec: "+lengthsec+"sampleRate: "+samplerate+" loop: "+isloop.ToString();
-        text2.text = "samples: "+samples+"lastSamplePos: "+lastSamplePos+"currentPos-GetPosition(): "+currentPos.ToString();
-        buffervisualization.localScale = new Vector3(currentPos*0.00001f,currentPos*0.00001f,currentPos*0.00001f);
+        text1.text = "lengthSec: "+lengthsec+" sampleRate: "+samplerate+" loop: "+isloop.ToString();
+        text2.text = "samples: "+samples+" lastSamplePos: "+lastSamplePos+" currentPos-GetPosition(): "+currentPos.ToString();
+        buffervisualization.localScale = new Vector3(currentPos*0.00003f,currentPos*0.00003f,currentPos*0.00003f);
         buffervisualization.position = new Vector3(0,0,20);
 
 
