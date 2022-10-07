@@ -15,6 +15,7 @@ public class PlayButton : MonoBehaviour
     public Text text1;
     int recordlength=0;
     private Coroutine coroutine=null;
+    private bool pauseclicked = false;
     
     private void Start()
     {
@@ -44,6 +45,7 @@ public class PlayButton : MonoBehaviour
     {
 
         text1.text ="Recorded Length: "+recordlength.ToString();
+        
     }
 
     private void Clicked0() {
@@ -62,7 +64,8 @@ public class PlayButton : MonoBehaviour
  
 
     private void Clicked2() {//recored중지.
-       
+
+        pauseclicked = true;
        mic.isrecoreded = false;
        StopAllCoroutines();
        coroutine = null;
@@ -87,7 +90,9 @@ public class PlayButton : MonoBehaviour
 
         while (true)
         {
-            
+            if (mic.isrecoreded == true && pauseclicked==false &&mic.recordfinish==true)
+            {
+                StopAllCoroutines();}
 
             yield return new WaitForSeconds(1f);
            

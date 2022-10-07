@@ -8,8 +8,10 @@ using UnityEngine.UI;
 
 public class Mic : MonoBehaviour
 {
+    
     //static private int num
-    private AudioSource audiosource;
+
+    public AudioSource audiosource;
     private AudioClip mic;
     private float[] samples = null;
     private List<float> readSamples = null;
@@ -19,7 +21,7 @@ public class Mic : MonoBehaviour
     private int lastSamplePos = 0;
     public bool isrecoreded=false;
     private int channels ;
-    
+    public bool recordfinish=false;
     public Text text1;
    
     public Text text2;
@@ -67,8 +69,9 @@ public class Mic : MonoBehaviour
 
     public void StartRecording()//녹음을 위한 
     {
+        recordfinish = false;
 
-        
+       
         print("start recording");
         mic = Microphone.Start(Microphone.devices[0].ToString(),isloop,lengthsec,samplerate);
         //devices: 현재 장치에 연결된 마이크들의 이름이 있는 리스트이다. 
@@ -84,6 +87,7 @@ public class Mic : MonoBehaviour
         //녹음할 클립의 샘플 rate
         channels = mic.channels;
         isrecoreded = true;
+        
 
     }
 
@@ -92,12 +96,15 @@ public class Mic : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        
         if (isrecoreded == true) 
         {
-            
             ReadMic();
            
+           
         }
+       
+        
         text1.text = "lengthSec: "+lengthsec+" sampleRate: "+samplerate+" loop: "+isloop.ToString();
         text2.text = "samples: "+samples+" lastSamplePos: "+lastSamplePos+" currentPos-GetPosition(): "+currentPos.ToString();
         buffervisualization.localScale = new Vector3(currentPos*0.00003f,currentPos*0.00003f,currentPos*0.00003f);
@@ -109,31 +116,34 @@ public class Mic : MonoBehaviour
 
     }
 
-    public void ReadMic()
+    private  void ReadMic()
     {
         print("read mic");
         
+
+
         currentPos = Microphone.GetPosition(Microphone.devices[0].ToString());
         //가장 최근에 기록한 오디오 샘플의 위치를 저장하는 변수이다.
         if (currentPos - lastSamplePos > 0)
         {
             samples = new float[(currentPos - lastSamplePos)];
-            
+
             mic.GetData(samples, lastSamplePos);
-            
+
             readSamples.AddRange(samples);
         }
 
         lastSamplePos = currentPos;
+    }
 
-       
 
 
-    
 
-}
-    
-    
+
+
+
+
+
 
 
 }

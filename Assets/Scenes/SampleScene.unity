@@ -153,9 +153,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: beeb8a88819bd488684a57fc8a1ff2b8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  audiosource: {fileID: 0}
   lengthsec: 10
-  isloop: 1
+  isloop: 0
   isrecoreded: 0
+  recordfinish: 0
   text1: {fileID: 1136177561}
   text2: {fileID: 780435088}
   buffervisualization: {fileID: 1497471336}
