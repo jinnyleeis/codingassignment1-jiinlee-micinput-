@@ -5,6 +5,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
+
 public class Mic : MonoBehaviour
 {
     //static private int num
@@ -20,7 +21,10 @@ public class Mic : MonoBehaviour
     private int channels ;
     
     public Text text1;
+   
     public Text text2;
+    
+    
     private int currentPos;
     public Transform buffervisualization;
     
@@ -63,7 +67,7 @@ public class Mic : MonoBehaviour
 
     public void StartRecording()//녹음을 위한 
     {
-       
+
         
         print("start recording");
         mic = Microphone.Start(Microphone.devices[0].ToString(),isloop,lengthsec,samplerate);
@@ -90,6 +94,7 @@ public class Mic : MonoBehaviour
     {
         if (isrecoreded == true) 
         {
+            
             ReadMic();
            
         }
@@ -121,12 +126,13 @@ public class Mic : MonoBehaviour
 
         lastSamplePos = currentPos;
 
+       
+
 
     
 
 }
     
-
     
 
 
