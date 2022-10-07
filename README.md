@@ -1,10 +1,12 @@
 # codingassignment1-jiinlee-micinput-
 
-#isloop==true -> circular buffer
+isloop==true 
+-> circular buffer
 
-<img width="786" alt="무제 2" src="https://user-images.githubusercontent.com/101055312/194525154-92f7bf45-2322-4d5a-b2b5-e04ffa50c44f.png">
-#isloop==false -? circular buffer X
-
-<img width="786" alt="무제 23" src="https://user-images.githubusercontent.com/101055312/194537920-78b18d70-bc7a-4c29-b3e7-459b20749304.png">
+![ISLOOP_TRUE2_AdobeExpress](https://user-images.githubusercontent.com/101055312/194541080-3312f9f7-aa58-48eb-a228-2bb527658da0.gif)
 
 
+isloop==false ->
+circular buffer X
+
+![ISLOOP_FALSE2_AdobeExpress](https://user-images.githubusercontent.com/101055312/194541125-9a0783b4-c23d-45ac-8beb-becdb9d9874a.gif)
