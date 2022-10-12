@@ -1,6 +1,6 @@
 # codingassignment1-jiinlee-micinput-
 
-노션에 업로드한 보고서 : https://www.notion.so/20190094-coding-assignment1-42df7d689b80416db4597ccaf938dcbc#17ea008fe89b4471822a6fcb736cd14d
+노션에 업로드한 보고서 : https://winter-scapula-675.notion.site/20190094-coding-assignment1-42df7d689b80416db4597ccaf938dcbc
 
 isloop==true 
 -> circular buffer
