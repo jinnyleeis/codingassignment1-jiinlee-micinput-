@@ -1,5 +1,7 @@
 # codingassignment1-jiinlee-micinput-
 
+노션에 업로드한 보고서 : https://www.notion.so/20190094-coding-assignment1-42df7d689b80416db4597ccaf938dcbc#17ea008fe89b4471822a6fcb736cd14d
+
 isloop==true 
 -> circular buffer
 
@@ -15,4 +17,4 @@ circular buffer X
 ![ISLOOP_FALSE2_AdobeExpress-2](https://user-images.githubusercontent.com/101055312/194542461-0ad4dd04-abf4-472d-98b7-2c18207b59d8.gif)
 
 
-노션 보고서 : https://www.notion.so/20190094-coding-assignment1-42df7d689b80416db4597ccaf938dcbc#17ea008fe89b4471822a6fcb736cd14d
+
